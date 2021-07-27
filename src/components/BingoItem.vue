@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     toggleActive(event) {
-       event.target.classList.toggle('active')
+      event.target.classList.toggle('active')
     }
   }
 }
