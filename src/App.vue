@@ -3,6 +3,7 @@
     <div style="position: relative; display: flex; justify-content: center; margin-top: 50px">
       <img
           src="https://thijskuilman.github.io/van-rossem-bingo/logo.png"
+          class="no-print"
           style="height: 100px; width: 100px; position: absolute; border: 2px solid #fff; border-radius: 5px;">
     </div>
     <div class="main-content">
@@ -19,6 +20,22 @@
       <div class="bingo-card" style="  justify-content: center;">
         <BingoItem :key="item" v-for="item in items" :msg="item"/>
       </div>
+    </div>
+
+    <div style="position: relative; display: flex; justify-content: center; margin-top: 50px" class="no-print">
+      <a target="_blank" href="https://podcasts.apple.com/nl/podcast/maarten-van-rossem-de-podcast/id1513807137">
+        <img src="https://thijskuilman.github.io/van-rossem-bingo/apple.svg">
+      </a>
+      <div style="width: 10px"></div>
+      <a target="_blank" href="https://open.spotify.com/show/1RGUJ8uKoJTTMOJjIHoe8n">
+        <img src="https://thijskuilman.github.io/van-rossem-bingo/spotify.svg">
+      </a>
+    </div>
+
+    <div style="text-align: center; margin-top: 35px; margin-bottom: 50px;" class="no-print">
+      <small style="color: #555c7b">
+        Gemaakt door Thijs Kuilman. Afbeelding is eigendom van <a href="https://www.maartendepodcast.nl/" style="color: #555c7b">maartendepodcast.nl</a>.
+      </small>
     </div>
   </div>
 </template>
@@ -69,7 +86,7 @@ export default {
 @charset "UTF-8";
 
 a {
-  color: #f9efa6;
+  color: #fff;
 }
 
 * {
@@ -144,7 +161,7 @@ footer a .icons {
 }
 
 .title {
-  color: #f9efa6;
+  color: #fff;
   padding: 30px 10px;
   padding-bottom: 10px;
   padding-top: 65px;
@@ -162,9 +179,9 @@ footer a .icons {
 }
 
 .sub-title {
-  color: #f9efa6;
+  color: #fff;
   padding: 5px 5px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   grid-column: span 4;
   text-align: center;
   font-size: 12px;
@@ -191,7 +208,7 @@ footer a .icons {
   font-size: 12px;
   line-height: 1.35;
   user-select: none;
-  color: #fff;
+  color: #d3f3ff;
 }
 
 .bingo-card__item:after {
@@ -286,7 +303,7 @@ body {
 
 html,
 body {
-  height: 100%;
+  min-height: 100%;
 }
 
 @media print
