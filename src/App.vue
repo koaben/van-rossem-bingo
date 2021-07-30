@@ -17,9 +17,36 @@
           Klik om de vakjes op ze af te strepen of <a href="#print" @click="print">download de printversie</a>.
         </span>
       </div>
-      <div class="bingo-card" style="  justify-content: center;">
-        <BingoItem :key="item" v-for="item in items" :msg="item"/>
+      <div class="bingo-card" style="justify-content: center;">
+        <BingoItem :key="item" v-for="(item, index) in items" :msg="item" :editMode="editMode" :index="index" v-on:quote-changed="quoteChanged"/>
       </div>
+
+      <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100%; color: rgb(211 243 255); font-size: 14px; margin-bottom: 15px; margin-top: 5px; ">
+
+        <div style="display: inline-flex; align-items: center; cursor: pointer;" @click="editMode = true; editSaved = false" v-if="!editMode">
+          <!-- pencil svg -->
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 15px; margin-right: 6px;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+          Bingokaart bewerken
+        </div>
+
+        <div style="display: inline-flex; align-items: center; cursor: pointer; color: #5cff5c" @click="editMode = false; editSaved = true;" v-if="editMode">
+          <!-- save svg -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 15px; margin-right: 6px;">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+          </svg>
+          Wijzigingen opslaan en delen
+        </div>
+
+
+        <div style="display: inline-flex; flex-direction: column; align-items: center; cursor: pointer; background: #62de4c; padding: 5px 10px; width: 80%; border-radius: 5px; color: rgb(33 76 19); margin-top: 10px;" v-if="editSaved && showSaveMessage">
+           De wijzigingen zijn opgeslagen! Je kunt je bingokaart met de volgende link delen:
+
+          <input type="text" :value="currentUrl" style="margin-top: 10px; width: 90%">
+        </div>
+      </div>
+
     </div>
 
     <div style="position: relative; display: flex; justify-content: center; margin-top: 50px" class="no-print">
@@ -46,16 +73,49 @@ import BingoItem from './components/BingoItem.vue'
 export default {
   name: 'App',
   mounted() {
+    const CSVToJSON = (data, delimiter = '|') => {
+      const titles = data.slice(0, data.indexOf('\n')).split(delimiter);
+      return data
+          .slice(data.indexOf('\n') + 1)
+          .split('\n')
+          .map(v => {
+            const values = v.split(delimiter);
+            return titles.reduce(
+                (obj, title, index) => ((obj[title] = values[index]), obj),
+                {}
+            );
+          });
+    };
+
+    var url = new URL(window.location.href);
+    if (url.searchParams.get('custom')) {
+      var quotesAsString = decodeURIComponent(atob(url.searchParams.get('custom')));
+      // this.items = CSVToJSON(quotesAsString)[0];
+      this.items = Object.values(CSVToJSON(quotesAsString)[0]);
+    }
     this.items = (this.items).sort(() => 0.5 - Math.random());
   },
   methods:
-  {
-    print() {
-    window.print()
-  }
+      {
+        print() {
+          window.print()
+        },
+        quoteChanged(quote) {
+          this.items[quote.index] = quote.quote;
+          var searchParams = new URLSearchParams(window.location.search)
+          searchParams.set('custom', btoa(encodeURIComponent(Object.values(this.items).join("|"))));
+          var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+          history.pushState(null, '', newRelativePathQuery);
+          this.currentUrl = window.location.href;
+          this.showSaveMessage = true;
+        }
   },
   data: function () {
     return {
+      showSaveMessage: false,
+      currentUrl: '',
+      editSaved: false,
+      editMode: false,
       items: [
         "In allerlei opzichten",
         "Lampje van de camera",
@@ -96,11 +156,6 @@ a {
 body {
   background: #f8f8f8;
   font-family: "Nunito", sans-serif;
-  user-select: none; /* supported by Chrome and Opera */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 
 aside.context {
