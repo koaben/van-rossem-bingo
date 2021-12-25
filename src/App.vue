@@ -2,7 +2,7 @@
   <div id="app">
     <div style="position: relative; display: flex; justify-content: center; margin-top: 50px">
       <img
-          src="https://thijskuilman.github.io/van-rossem-bingo/logo.png"
+          src="https://i.redd.it/4qn19gaf72m21.png"
           class="no-print"
           style="height: 100px; width: 100px; position: absolute; border: 2px solid #fff; border-radius: 5px;">
     </div>
@@ -51,17 +51,19 @@
 
     <div style="position: relative; display: flex; justify-content: center; margin-top: 50px" class="no-print">
       <a target="_blank" href="https://podcasts.apple.com/nl/podcast/maarten-van-rossem-de-podcast/id1513807137">
-        <img src="https://thijskuilman.github.io/van-rossem-bingo/apple.svg">
+        <img src="/van-rossem-bingo/apple.svg">
       </a>
       <div style="width: 10px"></div>
       <a target="_blank" href="https://open.spotify.com/show/1RGUJ8uKoJTTMOJjIHoe8n">
-        <img src="https://thijskuilman.github.io/van-rossem-bingo/spotify.svg">
+        <img src="/van-rossem-bingo/spotify.svg">
       </a>
     </div>
 
     <div style="text-align: center; margin-top: 35px; margin-bottom: 50px;" class="no-print">
       <small style="color: #555c7b">
-        Gemaakt door Thijs Kuilman. Afbeelding is eigendom van <a href="https://www.maartendepodcast.nl/" style="color: #555c7b">maartendepodcast.nl</a>.
+        Copied from <a href="https://thijskuilman.github.io/van-rossem-bingo" > https://thijskuilman.github.io/van-rossem-bingo</a>
+
+        Afbeelding is eigendom van <a href="https://www.maartendepodcast.nl/" style="color: #555c7b">maartendepodcast.nl</a>.
       </small>
     </div>
   </div>
@@ -353,7 +355,7 @@ footer a .icons {
 
 body {
   background: #121731;
-  background-image: url("https://thijskuilman.github.io/van-rossem-bingo/dark-dotted-2.png");
+  background-image: url("/van-rossem-bingo/dark-dotted-2.png");
 }
 
 html,
