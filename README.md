@@ -11,26 +11,10 @@ Startup via:
 
 ----
 Deploy via:
-1. npm run build
-2. npm run deploy
+1. npm install gh-pages
+2. npm run build
+3. npm run deploy
 
-```
-
-### Compiles and hot-reloads for development
-```
-
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
-# van-rossem-bingo
