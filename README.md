@@ -15,6 +15,7 @@ Deploy via:
 2. npm run build
 3. npm run deploy
 
+update
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
